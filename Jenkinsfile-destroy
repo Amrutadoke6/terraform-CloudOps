@@ -1,0 +1,30 @@
+pipeline {
+  agent any
+
+  environment {
+    AWS_DEFAULT_REGION = 'us-east-1'
+    TF_IN_AUTOMATION = 'true'
+  }
+
+  stages {
+    stage('Checkout Repo') {
+      steps {
+        git url: 'https://github.com/Amrutadoke6/terraform-CloudOps.git', branch: 'main'
+      }
+    }
+
+    stage('Terraform Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+
+    stage('Terraform Destroy') {
+      steps {
+        input message: 'Confirm destroy?'
+        sh 'terraform destroy -auto-approve'
+      }
+    }
+  }
+}
+
