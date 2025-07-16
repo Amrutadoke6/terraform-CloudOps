@@ -16,7 +16,7 @@ resource "aws_db_instance" "sql" {
 }
 
 resource "aws_secretsmanager_secret" "rds" {
-  name = "${var.project}-rds-credentials-tmp"
+  name = "${var.project}-rds-credentials-v3"
 }
 
 resource "aws_secretsmanager_secret_version" "rds_secret" {
