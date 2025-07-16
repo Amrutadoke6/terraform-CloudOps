@@ -10,7 +10,6 @@ Destroy Pipeline → `terraform destroy`
 Modular Code with Reusable Terraform Modules
 
 
-
 $Final Directory Structure
 
 terraform-CloudOps/
