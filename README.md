@@ -1,22 +1,35 @@
 AWS CloudOps Infrastructure with Terraform + Jenkins CI/CD
 
 This project automates the provisioning and destruction of AWS infrastructure using Terraform modules and a Jenkins-based CI/CD pipeline.
+
+
 CI Pipeline → `terraform apply`  
 Destroy Pipeline → `terraform destroy`  
 Modular Code with Reusable Terraform Modules
 
 
 $Final Directory Structure
+
 terraform-CloudOps/
+
 1.backend.tf # Remote backend config (S3 + DynamoDB)
+
 2.main.tf # Root file connecting all modules
+
 3.providers.tf # AWS provider config
+
 4.terraform.tfvars # User-defined variable values
+
 5.variables.tf # Input variables for root module
+
 6.outputs.tf # Root output values
+
 7.Jenkinsfile # CI pipeline to deploy infrastructure
+
 8.Jenkinsfile-destroy # CI pipeline to destroy infrastructure
+
 9.scripts/bootstrap.ps1 # Windows IIS setup script
+
 
 10.modules/
 vpc/ # Custom VPC module
