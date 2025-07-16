@@ -4,8 +4,11 @@ This project automates the provisioning and destruction of AWS infrastructure us
 
 
 CI Pipeline → `terraform apply`  
+
 Destroy Pipeline → `terraform destroy`  
+
 Modular Code with Reusable Terraform Modules
+
 
 
 $Final Directory Structure
@@ -33,6 +36,7 @@ terraform-CloudOps/
 
 10.modules/
 
+
 vpc/ # Custom VPC module
 
  1.main.tf
@@ -40,6 +44,7 @@ vpc/ # Custom VPC module
  2.variables.tf
 
  3.outputs.tf
+
 
 compute/ # Launch Template + ASG + ALB
 
@@ -58,6 +63,7 @@ rds/ # RDS SQL Server + Secrets Manager
   3.outputs.tf
 
 
+
 security/ # IAM roles, SSM, security groups
 
   1.main.tf
@@ -67,6 +73,7 @@ security/ # IAM roles, SSM, security groups
   3. ssm_secrets.tf
 
   4. outputs.tf
+
 
 
  monitoring/ # CloudWatch log group and alarms
@@ -101,7 +108,7 @@ Root Files
 
  1.modules/vpc/
 
-Creates a private network with:
+-Creates a private network with:
 
 - Public & Private subnets
 
@@ -117,7 +124,9 @@ resource "aws_subnet"
 resource "aws_nat_gateway" 
 
 
+
 2. modules/compute/
+
 
 Launches EC2 Windows IIS in private subnet using:
 
@@ -138,6 +147,7 @@ resource "aws_secretsmanager_secret"
 
 3.modules/rds/
 
+
 Deploys SQL Server instance with:
 
 Private subnet group
@@ -154,7 +164,9 @@ resource "aws_secretsmanager_secret"
 
 
 
+
 4.  modules/security/
+
 
 IAM and Security Groups:
 
@@ -206,6 +218,7 @@ terraform apply tfplan
 
 
 
+
 $$Jenkins Pipelines:
 
 Apply Pipeline (Jenkinsfile)
@@ -223,9 +236,10 @@ Manually triggered pipeline
 Runs terraform destroy -auto-approve
 
 
-Clean Up Resources:
+$$Clean Up Resources:
 
 terraform destroy -auto-approve
+
 
 
 $$Important point:
