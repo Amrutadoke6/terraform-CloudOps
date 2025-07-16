@@ -6,46 +6,51 @@ Destroy Pipeline → `terraform destroy`
 Modular Code with Reusable Terraform Modules
 
 
-Final Directory Structure
+$Final Directory Structure
 terraform-CloudOps/
-backend.tf # Remote backend config (S3 + DynamoDB)
-main.tf # Root file connecting all modules
-providers.tf # AWS provider config
-terraform.tfvars # User-defined variable values
-ariables.tf # Input variables for root module
- outputs.tf # Root output values
-Jenkinsfile # CI pipeline to deploy infrastructure
-Jenkinsfile-destroy # CI pipeline to destroy infrastructure
-scripts/bootstrap.ps1 # Windows IIS setup script
+1.backend.tf # Remote backend config (S3 + DynamoDB)
+2.main.tf # Root file connecting all modules
+3.providers.tf # AWS provider config
+4.terraform.tfvars # User-defined variable values
+5.variables.tf # Input variables for root module
+6.outputs.tf # Root output values
+7.Jenkinsfile # CI pipeline to deploy infrastructure
+8.Jenkinsfile-destroy # CI pipeline to destroy infrastructure
+9.scripts/bootstrap.ps1 # Windows IIS setup script
 
-modules/
+10.modules/
 vpc/ # Custom VPC module
- main.tf
- variables.tf
- outputs.tf
+
+ 1.main.tf
+ 2.variables.tf
+ 3.outputs.tf
 
 compute/ # Launch Template + ASG + ALB
-  main.tf
- variables.tf
- outputs.tf
+
+ 1.main.tf
+ 2.variables.tf
+ 3.outputs.tf
 
 rds/ # RDS SQL Server + Secrets Manager
-  main.tf
-  variables.tf
-  outputs.tf
+
+  1.main.tf
+  2.variables.tf
+  3.outputs.tf
 
 
 security/ # IAM roles, SSM, security groups
-  main.tf
-  ec2_read_secret.tf
-  ssm_secrets.tf
-  outputs.tf
+
+  1.main.tf
+  2.ec2_read_secret.tf
+  3. ssm_secrets.tf
+  4. outputs.tf
 
 
  monitoring/ # CloudWatch log group and alarms
-  main.tf
-  riables.tf
-  outputs.tf
+
+  1.main.tf
+  2.riables.tf
+  3.outputs.tf
 
 
 
@@ -54,11 +59,16 @@ What Each File/Module Does
 
 Root Files
 1.main.tf — Connects all modules like VPC, compute, RDS, security, monitoring
-backend.tf— Stores Terraform state in S3, locks state via DynamoDB
-terraform.tfvars — Sets values for variables like project name, db_user, db_pass
-variables.tf — Declares inputs required for the root module
-Jenkinsfile — Runs `terraform init`, `validate`, `plan`, and `apply`
-- `Jenkinsfile-destroy` — Automates `terraform destroy` for safe teardown
+
+2.backend.tf— Stores Terraform state in S3, locks state via DynamoDB
+
+3.terraform.tfvars — Sets values for variables like project name, db_user, db_pass
+
+4.variables.tf — Declares inputs required for the root module
+
+5.Jenkinsfile — Runs `terraform init`, `validate`, `plan`, and `apply`
+
+6.Jenkinsfile-destroy — Automates `terraform destroy` for safe teardown
 
 
 
